@@ -56,6 +56,9 @@ class PythonKit(product.Product):
                     self.args.install_destdir),
                 '-D', 'CMAKE_MAKE_PROGRAM={}'.format(self.toolchain.ninja),
                 '-D', 'CMAKE_Swift_COMPILER={}'.format(swiftc),
+                # SWIFT_ENABLE_TENSORFLOW
+                '-DCMAKE_Swift_COMPILER_TARGET=x86_64-apple-macosx10.13' if host_target.startswith('macosx') else '',
+                # SWIFT_ENABLE_TENSORFLOW END
                 '-B', self.build_dir,
                 '-S', self.source_dir,
             ])
